@@ -30,7 +30,7 @@ namespace CodingChallenge.Data.Classes
                 case EIdiomas.Castellano:
                     this.ListaVacia = "<h1>Lista vacía de formas!</h1>";
                     this.Header = "<h1>Reporte de Formas</h1>";
-                    this.Footer = "<br/>TOTAL:<br/>{0} formas Perimetro {1} Area {2}";
+                    this.Footer = "TOTAL:<br/>{0} formas Perimetro {1} Area {2}";
                     this.Circulo = "Círculo";
                     this.Cuadrado = "Cuadrado";
                     this.Triangulo = "Triángulo";
@@ -40,7 +40,7 @@ namespace CodingChallenge.Data.Classes
                 case EIdiomas.Ingles:
                     this.ListaVacia = "<h1>Empty list of shapes!</h1>";
                     this.Header = "<h1>Shapes report</h1>";
-                    this.Footer = "<br/>TOTAL:<br/>{0} shapes Perimeter {1} Area {2}";
+                    this.Footer = "TOTAL:<br/>{0} shapes Perimeter {1} Area {2}";
                     this.Circulo = "Circle";
                     this.Cuadrado = "Square";
                     this.Triangulo = "Triangle";

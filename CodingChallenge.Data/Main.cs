@@ -29,51 +29,27 @@ namespace CodingChallenge.Data.Classes
             }
             else
             {
-                List<Cuadrado> Cuadrados = new List<Cuadrado>();
-                List<TrianguloEquilatero> TriangulosEquilateros = new List<TrianguloEquilatero>();
-                List<Circulo> Circulos = new List<Circulo>();
-                List<Rectangulo> Rectangulos = new List<Rectangulo>();
-
                 sb.Append(Idioma.Header);
 
-                foreach (var forma in formas)
-                {
-                    switch ((EFormas)forma.Tipo)
-                    {
-                        case EFormas.Cuadrado:
-                            Cuadrados.Add(new Cuadrado(forma.Lado));
-                            break;
-                        case EFormas.TrianguloEquilatero:
-                            TriangulosEquilateros.Add(new TrianguloEquilatero(forma.Lado));
-                            break;
-                        case EFormas.Circulo:
-                            Circulos.Add(new Circulo(forma.Lado));
-                            break;
-                        case EFormas.Rectangulo:
-                            Rectangulos.Add(new Rectangulo(forma.Lado, forma.Lado2));
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException(@"Forma desconocida");
-                    }
-                }
+                if (formas.Where(x => x.Tipo == (int)EFormas.Cuadrado).ToList().Count > 0)
+                    sb.Append(EscrituraHelper.EscribirDatosForma(formas.Where(x => x.Tipo == (int)EFormas.Cuadrado).ToList().Count, EFormas.Cuadrado, formas.Where(x => x.Tipo == (int)EFormas.Cuadrado).ToList().Sum(x => x.Area).ToString("#.##"), formas.Where(x => x.Tipo == (int)EFormas.Cuadrado).ToList().Sum(x => x.Perimetro).ToString("#.##"), Idioma.Cuadrado, Idioma.Perimetro));
 
-                if (Cuadrados.Count > 0)
-                    sb.Append(string.Format("{0} {1} | Area {2} | {3} {4} <br/>", Cuadrados.Count, (Cuadrados.Count > 1 ? string.Format("{0}s", Idioma.Cuadrado) : Idioma.Cuadrado), Cuadrados.Sum(x => x.Area).ToString("#.##"), Idioma.Perimetro, Cuadrados.Sum(x => x.Perimetro).ToString("#.##")));
+                if (formas.Where(x => x.Tipo == (int)EFormas.Circulo).ToList().Count > 0)
+                    sb.Append(EscrituraHelper.EscribirDatosForma(formas.Where(x => x.Tipo == (int)EFormas.Circulo).ToList().Count, EFormas.Circulo, formas.Where(x => x.Tipo == (int)EFormas.Circulo).ToList().Sum(x => x.Area).ToString("#.##"), formas.Where(x => x.Tipo == (int)EFormas.Circulo).ToList().Sum(x => x.Perimetro).ToString("#.##"), Idioma.Circulo, Idioma.Perimetro));
 
-                if (Circulos.Count > 0)
-                    sb.Append(string.Format("{0} {1} | Area {2} | {3} {4} <br/>", Circulos.Count, (Circulos.Count > 1 ? string.Format("{0}s", Idioma.Circulo) : Idioma.Circulo), Circulos.Sum(x => x.Area).ToString("#.##"), Idioma.Perimetro, Circulos.Sum(x => x.Perimetro).ToString("#.##")));
+                if (formas.Where(x => x.Tipo == (int)EFormas.TrianguloEquilatero).ToList().Count > 0)
+                    sb.Append(EscrituraHelper.EscribirDatosForma(formas.Where(x => x.Tipo == (int)EFormas.TrianguloEquilatero).ToList().Count, EFormas.TrianguloEquilatero, formas.Where(x => x.Tipo == (int)EFormas.TrianguloEquilatero).ToList().Sum(x => x.Area).ToString("#.##"), formas.Where(x => x.Tipo == (int)EFormas.TrianguloEquilatero).ToList().Sum(x => x.Perimetro).ToString("#.##"), Idioma.Triangulo, Idioma.Perimetro));
 
-                if (TriangulosEquilateros.Count > 0)
-                    sb.Append(string.Format("{0} {1} | Area {2} | {3} {4} <br/>", TriangulosEquilateros.Count, (TriangulosEquilateros.Count > 1 ? string.Format("{0}s", Idioma.Triangulo) : Idioma.Triangulo), TriangulosEquilateros.Sum(x => x.Area).ToString("#.##"), Idioma.Perimetro, TriangulosEquilateros.Sum(x => x.Perimetro).ToString("#.##")));
-
-                if (Rectangulos.Count > 0)
-                    sb.Append(string.Format("{0} {1} | Area {2} | {3} {4} <br/>", Rectangulos.Count, (Rectangulos.Count > 1 ? string.Format("{0}s", Idioma.Rectangulo) : Idioma.Rectangulo), Rectangulos.Sum(x => x.Area).ToString("#.##"), Idioma.Perimetro, Rectangulos.Sum(x => x.Perimetro).ToString("#.##")));
+                if (formas.Where(x => x.Tipo == (int)EFormas.Rectangulo).ToList().Count > 0)
+                    sb.Append(EscrituraHelper.EscribirDatosForma(formas.Where(x => x.Tipo == (int)EFormas.Rectangulo).ToList().Count, EFormas.Rectangulo, formas.Where(x => x.Tipo == (int)EFormas.Rectangulo).ToList().Sum(x => x.Area).ToString("#.##"), formas.Where(x => x.Tipo == (int)EFormas.Rectangulo).ToList().Sum(x => x.Perimetro).ToString("#.##"), Idioma.Rectangulo, Idioma.Perimetro));
 
                 // FOOTER
-                sb.Append("TOTAL:<br/>");
-                sb.Append(string.Format("{0} {1} ", formas.Count, ((EIdiomas)idioma == EIdiomas.Castellano ? "formas" : "shapes")));
-                sb.Append(string.Format("{0} {1} ", ((EIdiomas)idioma == EIdiomas.Castellano ? "Perimetro" : "Perimeter"), (Cuadrados.Sum(x => x.Perimetro) + Circulos.Sum(x => x.Perimetro) + TriangulosEquilateros.Sum(x => x.Perimetro) + Rectangulos.Sum(x => x.Perimetro)).ToString("#.##")));
-                sb.Append(string.Format("Area {0}", (Cuadrados.Sum(x => x.Area) + Circulos.Sum(x => x.Area) + TriangulosEquilateros.Sum(x => x.Area) + Rectangulos.Sum(x => x.Area)).ToString("#.##")));
+                sb.Append(EscrituraHelper.EscribirFooter(formas.Count, (formas.Sum(x => x.Perimetro)).ToString("#.##"), (formas.Sum(x => x.Area)).ToString("#.##"), Idioma.Footer));
+
+                //sb.Append("TOTAL:<br/>");
+                //sb.Append(string.Format("{0} {1} ", formas.Count, ((EIdiomas)idioma == EIdiomas.Castellano ? "formas" : "shapes")));
+                //sb.Append(string.Format("{0} {1} ", ((EIdiomas)idioma == EIdiomas.Castellano ? "Perimetro" : "Perimeter"), (formas.Sum(x => x.Perimetro)).ToString("#.##")));
+                //sb.Append(string.Format("Area {0}", (formas.Sum(x => x.Area)).ToString("#.##")));
             }
 
             return sb.ToString();

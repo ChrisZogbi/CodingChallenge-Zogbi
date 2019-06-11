@@ -58,6 +58,7 @@
     <Compile Include="Classes\Rectangulo.cs" />
     <Compile Include="Classes\TrianguloEquilatero.cs" />
     <Compile Include="Enum.cs" />
+    <Compile Include="EscrituraHelper.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Classes\Idioma.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
